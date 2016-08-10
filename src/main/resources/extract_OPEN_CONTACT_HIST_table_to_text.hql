@@ -1,0 +1,14 @@
+--use onetimeload;
+drop table if exists OPEN_CONTACT_HIST_text;
+CREATE TABLE IF NOT EXISTS OPEN_CONTACT_HIST_text(CNTID_HOUSEHOLD_ID STRING, CNTID_cons_link STRING, CNTID_mld_cons_link STRING, CNTID_bus_link STRING, CNTID_mld_bus_link STRING, CNTID_cons_addr_link STRING, CNTID_bus_addr_link STRING, CNTID_PIN DECIMAL(13, 0), CNTID_MLD_PIN DECIMAL(13, 0), CNTID_BIN DECIMAL(13, 0), CNTID_MLD_BIN DECIMAL(13, 0), CNTID_first_name STRING, CNTID_last_name STRING, CNTID_addr1 STRING, CNTID_addr2 STRING, CNTID_city STRING, CNTID_state STRING, CNTID_zipcode STRING, CNTID_zip4 STRING, CNTID_bus_name STRING, CNTID_MASTER_ID DECIMAL(11, 0), CNTOP_OPEN_DBUID DECIMAL(10, 0), CNTOP_open_offer_type STRING, CNTOP_open_channel STRING, CNTOP_open_treatment_id STRING, CNTOP_open_cell_id STRING, CNTOP_open_cell_code_2 STRING, CNTOP_open_prim_src_code STRING, CNTOP_open_prim_src_code2 STRING, CNTOP_open_prim_src_code3 STRING, CNTOP_open_partition_code STRING, CNTOP_open_ia_code_1 STRING, CNTOP_open_prc_code STRING, CNTOP_open_ia_code_2 STRING, CNTOP_open_ia_code_3 STRING, CNTOP_open_ia_code_4 STRING, CNTOP_open_spid STRING, CNTOP_open_campaign_code STRING, CNTOP_open_campaign_code_2 STRING, CNTOP_open_template_code STRING, CNTOP_open_template_code_2 STRING, CNTOP_open_poid STRING, CNTOP_open_poid_2 STRING, CNTOP_open_vendor_code STRING, CNTOP_open_layout_code STRING, CNTOP_open_drop_dt DATE, CNTOP_open_wave_id STRING, CNTOP_open_ibtm STRING, CNTOP_open_ibtm_src_code1 STRING, CNTOP_open_ibtm_src_code2 STRING, CNTOP_open_ibtm_spid STRING, CNTOP_open_fee_code STRING, CNTOP_open_fee_code2 STRING, CNTOP_open_fee_code3 STRING, CNTOP_open_fee_code4 STRING, CNTOP_open_expiration_dt DATE, CNTOP_open_prescreen_dt DATE, CNTOP_open_web_apps STRING, CNTOP_open_web_src_code1 STRING, CNTOP_open_web_src_code2 STRING, CNTOP_open_web_src_code3 STRING, CNTOP_open_web_src_code4 STRING, CNTOP_open_web_spid_1 STRING, CNTOP_open_web_spid_2 STRING, CNTOP_open_web_spid_3 STRING, CNTOP_open_web_spid_4 STRING, CNTOP_open_offer_code STRING, CNTOP_open_state_supp STRING, CNTOP_open_campaign_id STRING, CNTOP_open_campaign_type STRING, CNTOP_open_sch_opt_date STRING, CNTOP_open_sch_ship_date STRING, CNTOP_open_sch_dtp_date STRING, CNTOP_open_costco_member_number STRING, CNTOP_email_address STRING, CNTOP_email_type STRING, CNTOP_deliverytype STRING, CNTOP_deliver_ind STRING, CNTOP_dsf_delivery_type STRING, CNTOP_ncoa_efct_dt DATE, CNTOP_cdi_vacancy_ind STRING, CNTOP_lacaddr_only_link STRING, CNTOP_lachouseholdid STRING, CNTOP_recordmatchcode STRING, CNTOP_pasaafootnotes STRING, CNTOP_record_source STRING)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '-2'
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE
+location '${hiveconf:out}';
+
+set  mapreduce.map.memory.mb=4096;
+set mapreduce.map.java.opts=-Xmx2450m;
+
+insert overwrite table OPEN_CONTACT_HIST_text 
+select * from OPEN_CONTACT_HIST;
